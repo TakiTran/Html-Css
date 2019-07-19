@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Result</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<style type="text/css">
+	.text-title {
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.header {
+		height: 80px;
+	}
+	.header > .container-fluid > .row > .time > fieldset{
+		margin: auto;
+		border: solid 2px #dbac69;
+		text-align: center;
+		width: 150px;
+		height: 50px;
+		border-radius: 5px;
+	}
+	.header > .container-fluid > .row > .time > fieldset > legend{
+		font-size: 13px;
+		margin: 0px;
+		width: auto;
+	}
+	.header > .container-fluid > .row > .time > .timer {
+		font-weight: bold;
+	}
+	.header > .container-fluid > .row > .menu > a > img {
+		width: 150px;
+	}
+	.header > .container-fluid > .row > .menu > span {
+		color: #dbac69;
+	}
+	.content > .container > .row > .image-teacher > img {
+		width: 140px;
+	}
+	.content > .container > .row > .result > .score > .score-title {
+		margin-left: 30px;
+	}
+	.content > .container > .row > .result > .table {
+		margin: 10px 0 20px 0;
+	}
+	.content > .container > .row > .result > .table > tbody > tr {
+		border: 1px solid #dee2e6;
+	}
+	.content > .container > .row > .result > .table > thead > tr > th {
+		background-color: #dbac69;
+		color: #ffffff;
+	}
+	.score-color {
+		color: #dbac69;
+	}
+	.text-title {
+		font-weight: bold;
+	}
+</style>
+<body>
+	<div class="header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4 menu">
+					<a href="index.html">
+						<img src="img/nativegen5-white.png">
+					</a>
+					<span class="text-title"> | Native Ai Test</span>
+				</div>
+				<div class="col-sm-4 time">
+					<fieldset>
+						<legend>Thời gian học</legend>
+						<span id="countTime" class="timer"></span>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-2 image-teacher">
+					<img src="img/teacher.png">
+				</div>
+				<div class="col-sm-8 result">
+					<div class="score">
+						<span class="text-title">Your score is: </span>
+						<span class="score-detail score-color">1/20</span>
+						<i class="fas fa-check-square score-title" style="color: blue"></i>
+						</span><span class="score-true score-color">1</span>
+						<i class="fas fa-minus-square score-title" style="color: red"></i>
+						<span class="score-false score-color">19</span>
+					</div>
+					<p class="message text-title">Your result is not good, but don't worry, let's pratice more, it will be better.</p>
+					<hr>
+					<p class="text-title">Chi tiết bài test của bạn</p>
+					<table class="table" style="font-size: 13px">
+						<thead>
+							<tr>
+								<th>Question_id</th>
+								<th>You_said</th>
+								<th>Test_answer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>You are lazy</td>
+								<td>You are crazy</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>You are lazy</td>
+								<td>You are crazy</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>You are lazy</td>
+								<td>You are crazy</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table" style="font-size: 13px">
+						<thead>
+							<tr>
+								<th>Question_id</th>
+								<th>You_said</th>
+								<th>Test_answer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>You are lazy</td>
+								<td>You are crazy</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>You are lazy</td>
+								<td>You are crazy</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>You are lazy</td>
+								<td>You are crazy</td>
+							</tr>
+						</tbody>
+					</table>
+					<button class="btn btn-success" onclick="window.location.href='exercise.html'">Làm lại bài test <i class="fas fa-arrow-right"></i></button>	
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+    var minutes = window.localStorage.getItem("minutes");
+    var seconds = window.localStorage.getItem("seconds");
+    var hours = window.localStorage.getItem("hours");
+    document.getElementById('countTime').innerHTML =  ('0'+ hours).slice(-2) + ":" + ('0'+ minutes).slice(-2) + ":" + ('0'+ seconds).slice(-2);
+</script>
+</html>

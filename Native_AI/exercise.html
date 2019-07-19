@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exercise</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  	<link rel="stylesheet" type="text/css" href="css/exercise.css">
+</head>
+<body>
+	<div class="header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4 menu">
+					<a href="index.html">
+						<img src="img/nativegen5-white.png">
+					</a>
+					<span class="text-title"> | Native Ai Test</span>
+				</div>
+				<div class="col-sm-4 time">
+					<fieldset>
+						<legend>Thời gian học</legend>
+						<span id="countTime" class="timer"></span>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="exercise">
+			<div class="question">
+				<span class="text-title">Choose the best word to complete the sentence.</span>
+				<p><i>(Chọn đáp án đúng nhất)</i></p>
+			</div>
+			<div class="answer">
+				<ul class="list-group">
+					<label class="form-check-label text-title" for="radio1">
+				 		<li class="list-group-item d-flex justify-content-between align-items-center">
+				 			<div class="form-check">
+					        	<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+					        	I am a cup.
+					    	</div>
+				  		</li>
+				  	</label>
+				  	<label class="form-check-label text-title" for="radio2">
+				 		<li class="list-group-item d-flex justify-content-between align-items-center">
+				 			<div class="form-check">
+					        	<input type="radio" class="form-check-input" id="radio2" name="optradio" value="option">
+					        	I am a boy.
+					    	</div>
+				  		</li>
+				  	</label>
+				  	<label class="form-check-label text-title" for="radio3">
+				 		<li class="list-group-item d-flex justify-content-between align-items-center">
+				 			<div class="form-check">
+					        	<input type="radio" class="form-check-input" id="radio3" name="optradio" value="option1">
+					        	I a cup.
+					    	</div>
+				  		</li>
+				  	</label>
+				  	<label class="form-check-label text-title" for="radio4">
+				 		<li class="list-group-item d-flex justify-content-between align-items-center">
+				 			<div class="form-check">
+					        	<input type="radio" class="form-check-input" id="radio4" name="optradio" value="option1">
+					        	I am very a cup.
+					    	</div>
+				  		</li>
+				  	</label>
+				</ul>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<img src="img/teacher.png">
+			<div class="lesson-process">
+				<div id="progress" class="progress progress-wrapper">
+				    <div id="progress-bar" class="progress-bar progress-proceed" style="width: 0%;"></div>
+				    <span id="tooltip-box" class="tooltip-box">
+				        <div id="tooltip-text" class="tooltip-text"></div>
+				    </span>
+				</div>
+				<div class="pagination">
+					<div class="col-sm-6 btn-pagination" style="text-align: right;">
+						<a href="#" class="btn"><i class="fas fa-arrow-left"></i> Previous</a>
+					</div>
+					<div class="col-sm-6 btn-pagination">
+						<a class="btn" id="pagination-next">Next <i class="fas fa-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+    var times = 0;
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+    function timer() {
+    	times ++;
+    	seconds = times % 60;
+    	if (seconds == 0) {
+    		minutes ++;
+    	}
+    	if (seconds == 60) {
+    		hours ++;
+    		seconds = 0;
+    	}
+        document.getElementById('countTime').innerHTML =  ('0'+ hours).slice(-2) + ":" + ('0'+ minutes).slice(-2) + ":" + ('0'+ seconds).slice(-2);
+        window.localStorage.setItem('minutes',minutes);
+        window.localStorage.setItem('seconds',seconds);
+        window.localStorage.setItem('hours',hours);
+    }
+ 	var countTime =  setInterval('timer()', 1000);
+ 	$(document).ready(function(){
+ 		progressBar();
+ 		$("#pagination-next").click(function(){
+ 			progressBar();
+ 		});
+ 	});
+
+ 	// have 5 questions ~ percentProcess = 20%
+ 	const percentProcess = 25;
+ 	const questions = 100 / percentProcess;
+ 	// percent to the following step to perform the page transfer
+ 	const percentMax = 100 - percentProcess;
+ 	function progressBar(){
+ 		var widthProgress = $("#progress").width();
+ 		var widthBar = Math.ceil($("#progress-bar").width() / widthProgress * 100);
+    	var widthToolTipBox = $("#tooltip-box").width();
+    	var numberExercise = parseInt($("#tooltip-text").text().substr(0,1));
+    	if(widthBar == 0) {
+    		widthBar = percentProcess;
+    		numberExercise = 1;
+    	} else {
+    		if(widthBar < percentMax) {
+    			widthBar += percentProcess;
+    			numberExercise ++;
+    		} else {
+    			window.location = "result.html";
+    		}
+    	}
+    	console.log(widthBar);
+    	$("#tooltip-text").text(numberExercise + "/" + questions);
+    	$("#progress-bar").css("width", widthBar + "%");
+    	$("#tooltip-box").css("margin-left", (widthBar * widthProgress / 100 - widthToolTipBox / 2) + "px");
+ 	}
+</script>
+</html>
